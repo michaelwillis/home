@@ -1,3 +1,4 @@
+(setq inhibit-splash-screen t)
 (set-frame-font "DejaVu Sans Mono-9" nil t)
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
