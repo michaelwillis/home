@@ -8,12 +8,21 @@
 (package-initialize)
 
 ;; Auto-install packages, hurray!
-(dolist (p '(better-defaults cider clojure-mode elpy))
+(dolist (p '(better-defaults cider clojure-mode elpy paredit))
   (when (not (member p package-activated-list))
     (list-packages)
     (package-install p)))
 
+(add-to-list 'load-path "~/.emacs.d")
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
+
+;; Clojure
 (require 'clojure-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(setq cider-repl-display-in-current-window t)
 
+;; Python
 (elpy-enable)
