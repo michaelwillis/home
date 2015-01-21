@@ -8,10 +8,19 @@
 (package-initialize)
 
 ;; Auto-install packages, hurray!
-(dolist (p '(better-defaults cider clojure-mode elpy paredit rainbow-delimiters))
+(defvar packages
+  '(better-defaults ido-hacks smex elpy
+    cider clojure-mode paredit rainbow-delimiters))
+
+(dolist (p packages)
   (when (not (member p package-activated-list))
-    (list-packages)
+    (package-refresh-contents)
     (package-install p)))
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; The old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Clojure
 (require 'clojure-mode)
@@ -21,7 +30,8 @@
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (setq cider-repl-display-in-current-window t)
 
-
+;; Emacs lisp
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 ;; Python
 (elpy-enable)

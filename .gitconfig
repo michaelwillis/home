@@ -1,0 +1,10 @@
+[user]
+	email = willismichael@gmail.com
+	name = Michael Willis
+[push]
+	default = current
+[alias]
+	pr = !git fetch -fu ${2:-main} refs/pull/$1/head:pr/$1 && :
+[core]
+	excludesfile = ~/.gitignore.global
+	editor = emacs --no-windows
